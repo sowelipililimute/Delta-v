@@ -1,0 +1,29 @@
+- type: parallax
+  id: ShatteredStation
+  layers:
+  - texture:
+      !type:ImageParallaxTextureSource
+      path: "/Textures/_DV/Parallaxes/Shattered/dust.png"
+    slowness: 0.998046875
+    scale: ".5, .5"
+  - texture:
+      !type:ImageParallaxTextureSource
+      path: "/Textures/_DV/Parallaxes/Shattered/stars.png"
+    slowness: 0.996625
+    scale: ".6, .6"
+  - texture:
+      !type:ImageParallaxTextureSource
+      path: "/Textures/_DV/Parallaxes/Shattered/nebulae.png"
+    slowness: 0.985265625
+    scale: ".41, .41"
+  - texture:
+      !type:ImageParallaxTextureSource
+      path: "/Textures/_DV/Parallaxes/Shattered/stars.png"
+    slowness: 0.984352
+    scale: ".9, .9"
+  - texture:
+      !type:ImageParallaxTextureSource
+      path: "/Textures/_DV/Parallaxes/Shattered/planet.png"
+    slowness: 0.998046875
+    scale: "1, 1"
+    tiled: false

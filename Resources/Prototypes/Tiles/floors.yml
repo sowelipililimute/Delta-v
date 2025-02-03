@@ -1483,6 +1483,24 @@
   weather: true
 
 - type: tile
+  id: FloorGrassShattered
+  name: shattered grass
+  sprite: /Textures/Tiles/shatteredgrass.png
+  baseTurf: FloorDirt
+  isSubfloor: true
+  edgeSpritePriority: 2
+  edgeSprites:
+    South: /Textures/Tiles/shatteredgrass_south.png
+    East: /Textures/Tiles/shatteredgrass_east.png
+    North: /Textures/Tiles/shatteredgrass_north.png
+    West: /Textures/Tiles/shatteredgrass_west.png
+  footstepSounds:
+    collection: FootstepGrass
+  itemDrop: FloorTileItemGrassJungle
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
   id: FloorGrassDark
   name: tiles-dark-grass-floor
   sprite: /Textures/Tiles/grassdark.png
