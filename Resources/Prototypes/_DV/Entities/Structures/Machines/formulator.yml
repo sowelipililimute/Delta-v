@@ -1,0 +1,36 @@
+- type: entity
+  parent: [BaseMachinePowered, SmallConstructibleMachine]
+  id: Formulator
+  name: formulator
+  description: Can produce medical items based on the interior formations.
+  components:
+  - type: Sprite
+    sprite: _DV/Structures/Machines/formulator.rsi
+    snapCardinals: true
+    layers:
+    - state: mediwave-base
+    - state: mediwave-off-unlit
+      shader: unshaded
+  - type: ActivatableUI
+    key: enum.FormulatorUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.FormulatorUiKey.Key:
+        type: FormulatorBoundUserInterface
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,19,5
+  - type: Formulator
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      container_slot: !type:ContainerSlot
+      storagebase: !type:Container
+  - type: StaticPrice
+    price: 1000

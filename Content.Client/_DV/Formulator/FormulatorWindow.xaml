@@ -1,0 +1,77 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                      Title="Formulator"
+                      MinSize="600 300"
+                      SetSize="800 500">
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  VerticalExpand="True">
+        <TabContainer Name="ContentTabs" HorizontalExpand="True" VerticalExpand="True">
+            <ScrollContainer HScrollEnabled="False"
+                             HorizontalExpand="True"
+                             VerticalExpand="True"
+                             MinHeight="50"
+                             SizeFlagsStretchRatio="2.5">
+                <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#1b1b1e" />
+                    </PanelContainer.PanelOverride>
+                    <GridContainer Name="FormulaList"
+                                   HorizontalExpand="True"
+                                   VerticalExpand="True"
+                                   Columns="2"
+                                   Margin="0 16 0 0"/>
+                </PanelContainer>
+            </ScrollContainer>
+            <ScrollContainer HScrollEnabled="False"
+                             HorizontalExpand="True"
+                             VerticalExpand="True"
+                             MinHeight="50"
+                             SizeFlagsStretchRatio="2.5">
+                <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#1b1b1e" />
+                    </PanelContainer.PanelOverride>
+                    <GridContainer Name="ReagentList"
+                                   HorizontalExpand="True"
+                                   VerticalExpand="True"
+                                   Columns="3"
+                                   Margin="10"/>
+                </PanelContainer>
+            </ScrollContainer>
+        </TabContainer>
+        <BoxContainer Orientation="Horizontal">
+            <BoxContainer Orientation="Vertical" Margin="8">
+                <Label Name="ContainerInfoName"
+                       HorizontalAlignment="Center" />
+                <Label Name="ContainerInfoFill"
+                       HorizontalAlignment="Center"
+                       StyleClasses="LabelSubText" />
+                <SpriteView Name="ContainerView"
+                            Scale="2 2"
+                            HorizontalAlignment="Center" />
+                <Button Name="EjectButton"
+                        Text="{Loc 'formulator-window-eject'}"/>
+            </BoxContainer>
+            <ScrollContainer HScrollEnabled="False"
+                             HorizontalExpand="True"
+                             VerticalExpand="True"
+                             MinHeight="50">
+                <PanelContainer VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#1b1b1e" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Name="ContainerInfo"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  VerticalExpand="True"
+                                  Margin="5">
+                        <Label Text="{Loc 'formulator-window-no-contents'}" />
+                    </BoxContainer>
+                </PanelContainer>
+            </ScrollContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>
