@@ -1,6 +1,7 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -46,6 +47,14 @@ public sealed partial class FormulatorComponent : Component
 
     public const string ContainerSlotName = "container_slot";
 
+    public static EntProtoId PillPrototypeId = "Pill";
+
+    [DataField]
+    public int MaxPillDosage = 20;
+
+    [DataField]
+    public SoundSpecifier ClickSound = new SoundPathSpecifier("/Audio/Machines/machine_switch.ogg");
+
     [DataField, AutoNetworkedField]
     public List<Formula> Formulas = new()
     {
@@ -80,4 +89,15 @@ public sealed partial class FormulatorComponent : Component
 public enum FormulatorUiKey
 {
     Key
+}
+
+[Serializable, NetSerializable]
+public sealed class FormulatorMessageFormulate : BoundUserInterfaceMessage
+{
+    public readonly Formula Formula;
+
+    public FormulatorMessageFormulate(Formula formula)
+    {
+        Formula = formula;
+    }
 }

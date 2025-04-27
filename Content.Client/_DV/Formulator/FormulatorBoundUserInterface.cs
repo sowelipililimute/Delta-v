@@ -3,7 +3,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Client._DV.Formulator;
 
-public sealed class FormulatorBoundUserInterface : SharedFormulatorBUI
+public sealed class FormulatorBoundUserInterface : BoundUserInterface
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
     private readonly FormulatorSystem _formulator;
@@ -22,8 +22,14 @@ public sealed class FormulatorBoundUserInterface : SharedFormulatorBUI
         base.Open();
 
         _window = this.CreateWindow<FormulatorWindow>();
+        _window.OnFormulate += OnFormulate;
 
         Update();
+    }
+
+    private void OnFormulate(Formula formula)
+    {
+        SendPredictedMessage(new FormulatorMessageFormulate(formula));
     }
 
     public override void Update()
@@ -38,7 +44,7 @@ public sealed class FormulatorBoundUserInterface : SharedFormulatorBUI
         UpdateContents();
     }
 
-    public override void UpdateFormulas()
+    public void UpdateFormulas()
     {
         if (_window is null)
             return;
@@ -49,7 +55,7 @@ public sealed class FormulatorBoundUserInterface : SharedFormulatorBUI
         _window.UpdateFormulas(formulator.Formulas);
     }
 
-    public override void UpdateInsertedContainer()
+    public void UpdateInsertedContainer()
     {
         if (_window is null)
             return;
@@ -64,7 +70,7 @@ public sealed class FormulatorBoundUserInterface : SharedFormulatorBUI
         }
     }
 
-    public override void UpdateContents()
+    public void UpdateContents()
     {
         if (_window is null)
             return;

@@ -18,10 +18,14 @@ public sealed partial class FormulaCard : Control
     private static ResPath PillsRsiPath = new("/Textures/_DV/Objects/Specific/Chemistry/pills.rsi");
     private static ResPath BottlesRsiPath = new("/Textures/_DV/Objects/Specific/Chemistry/bottle.rsi");
 
+    public Action<Formula>? OnFormulate;
+
     public FormulaCard(Formula formula, IPrototypeManager prototypeManager, SpriteSystem sprites)
     {
         RobustXamlLoader.Load(this);
         ReagentBar.MinBarSize = new(15, 0);
+
+        FormulateButton.OnPressed += _ => OnFormulate?.Invoke(formula);
 
         FormulaNameLabel.Text = formula.Name;
         foreach (var quantity in formula.ReagentQuantities)

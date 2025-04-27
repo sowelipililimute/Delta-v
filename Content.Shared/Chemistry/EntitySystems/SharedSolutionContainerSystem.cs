@@ -379,6 +379,20 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         return splitSol;
     }
 
+    /// DeltaV - we need to pick out specific reagents from solutions
+    /// <summary>
+    /// Splits a solution with only the specified reagent(s).
+    /// </summary>
+    public Solution SplitSolutionWithOnly(Entity<SolutionComponent> soln, FixedPoint2 quantity, params string[] reagents)
+    {
+        var (uid, comp) = soln;
+        var solution = comp.Solution;
+
+        var splitSol = solution.SplitSolutionWithOnly(quantity, reagents);
+        UpdateChemicals(soln);
+        return splitSol;
+    }
+
     public void RemoveAllSolution(Entity<SolutionComponent> soln)
     {
         var (uid, comp) = soln;

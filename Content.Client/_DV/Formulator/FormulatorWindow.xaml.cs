@@ -18,6 +18,8 @@ public sealed partial class FormulatorWindow : FancyWindow
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
+    public Action<Formula>? OnFormulate;
+
     private readonly SpriteSystem _sprites;
 
     public FormulatorWindow()
@@ -61,7 +63,9 @@ public sealed partial class FormulatorWindow : FancyWindow
 
         foreach (var formula in formulas)
         {
-            FormulaList.Children.Add(new FormulaCard(formula, _prototypeManager, _sprites));
+            var card = new FormulaCard(formula, _prototypeManager, _sprites);
+            card.OnFormulate += args => OnFormulate?.Invoke(args);
+            FormulaList.Children.Add(card);
         }
     }
 
