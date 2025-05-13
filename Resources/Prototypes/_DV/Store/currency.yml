@@ -2,3 +2,8 @@
   id: AiMemory
   displayName: store-currency-display-ai-memory
   canWithdraw: false
+
+- type: currency
+  id: RecoveredMind
+  displayName: store-currency-display-recovered-mind
+  canWithdraw: false

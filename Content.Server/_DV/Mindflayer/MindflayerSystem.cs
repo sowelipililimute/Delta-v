@@ -1,6 +1,7 @@
 using Content.Server.Body.Systems;
 using Content.Server.Store.Systems;
 using Content.Shared._DV.Mindflayer;
+using Content.Shared.FixedPoint;
 
 namespace Content.Server._DV.Mindflayer;
 
@@ -25,5 +26,14 @@ public sealed class MindflayerSystem : SharedMindflayerSystem
     private void OnAddSolutionToBloodstream(Entity<MindflayerComponent> ent, ref MindflayerAddSolutionToBloodstreamEvent args)
     {
         _bloodstream.TryAddToChemicals(ent, args.Solution);
+    }
+
+    protected override void OnSiphonMindDoAfter(Entity<MindflayerComponent> ent, ref MindflayerSiphonMindDoAfterEvent args)
+    {
+        base.OnSiphonMindDoAfter(ent, ref args);
+
+        _store.TryAddCurrency(new Dictionary<string, FixedPoint2>() {
+            {ent.Comp.SiphonCurrency, ent.Comp.SiphonQuantity}
+        }, ent);
     }
 }

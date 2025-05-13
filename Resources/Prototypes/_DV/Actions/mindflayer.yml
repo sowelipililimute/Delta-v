@@ -47,3 +47,19 @@
         reagents:
         - ReagentId: RejuvenatingNanites
           Quantity: 10
+
+- type: entity
+  id: ActionMindFlayerSiphonMind
+  name: Siphon Mind
+  description: Draw Mind from others so that we may use it
+  components:
+  - type: EntityTargetAction
+    useDelay: 50
+    whitelist:
+      components:
+        - HumanoidAppearance
+    itemIconStyle: NoItem
+    icon:
+      sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
+      state: siphon
+    event: !type:MindflayerSiphonMindActionEvent
