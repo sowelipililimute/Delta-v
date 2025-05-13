@@ -1,0 +1,49 @@
+# Actions
+- type: entity
+  id: ActionMindFlayerOpenShop
+  name: Self-Augment Operations
+  description: Choose how we will upgrade ourselves
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    icon:
+      sprite: _DV/Interface/Actions/mindflayer.rsi
+      state: choose_module
+    event: !type:MindflayerShopActionEvent
+
+- type: entity
+  id: ActionMindFlayerSwarmprod
+  name: Swarmprod
+  description: We shape our arm into an extended mass of sparking nanites
+  components:
+  - type: InstantAction
+    raiseOnAction: true
+    itemIconStyle: BigAction
+    icon:
+      sprite: _DV/Interface/Actions/mindflayer.rsi
+      state: swarmprod
+    event: !type:RetractItemActionEvent
+  - type: RetractableItemAction
+  - type: ContainerContainer
+    containers:
+      retractable_slot: !type:ContainerSlot
+  - type: ContainerFill
+    containers:
+      retractable_slot:
+        - Swarmprod
+
+- type: entity
+  id: ActionMindFlayerQuickReboot
+  name: Quick Reboot
+  description: Heal and remove any incapacitating effects from ourselves
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    icon:
+      sprite: _DV/Interface/Actions/mindflayer.rsi
+      state: quick_reboot
+    event: !type:MindflayerAddSolutionToBloodstreamEvent
+      solution:
+        reagents:
+        - ReagentId: RejuvenatingNanites
+          Quantity: 10

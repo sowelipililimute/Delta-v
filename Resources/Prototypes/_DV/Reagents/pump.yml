@@ -1,0 +1,56 @@
+- type: reagent
+  id: RejuvenatingNanites
+  name: reagent-name-rejuvenating-nanites
+  group: Narcotics
+  desc: reagent-desc-rejuvenating-nanites
+  physicalDesc: reagent-physical-desc-energizing
+  flavor: sharp
+  color: "#9A040E"
+  boilingPoint: 212.0
+  meltingPoint: 170.0
+  metabolisms:
+    Pump:
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 1.1
+        sprintSpeedModifier: 1.1
+        conditions:
+        - !type:OrganType
+          type: IPC
+      - !type:GenericStatusEffect
+        key: Stun
+        time: 3
+        type: Remove
+        conditions:
+        - !type:OrganType
+          type: IPC
+      - !type:GenericStatusEffect
+        key: KnockedDown
+        time: 3
+        type: Remove
+        conditions:
+        - !type:OrganType
+          type: IPC
+      - !type:GenericStatusEffect
+        key: StaminaModifier
+        component: StaminaModifier
+        time: 3
+        type: Add
+        conditions:
+        - !type:OrganType
+          type: IPC
+      - !type:GenericStatusEffect
+        key: ForcedSleep
+        time: 3
+        type: Remove
+        conditions:
+        - !type:OrganType
+          type: IPC
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: -2
+            Brute: -2
+        conditions:
+        - !type:OrganType
+          type: IPC

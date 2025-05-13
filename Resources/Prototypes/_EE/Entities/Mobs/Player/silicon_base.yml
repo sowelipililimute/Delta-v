@@ -158,7 +158,7 @@
       bloodReagent: Oil
       bleedReductionAmount: 0
       bloodMaxVolume: 100
-      chemicalMaxVolume: 0
+      chemicalMaxVolume: 100 # DeltaV - mindflayers
       bleedPuddleThreshold: 3
       bloodRefreshAmount: 0
       bloodlossThreshold: 0.8

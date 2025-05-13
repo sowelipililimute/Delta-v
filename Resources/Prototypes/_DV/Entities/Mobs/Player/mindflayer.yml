@@ -1,0 +1,32 @@
+- type: entity
+  parent: MobIPC
+  id: MobMindflayer
+  components:
+  - type: Mindflayer
+  - type: ActionGrant
+    actions:
+    - ActionMindFlayerOpenShop
+    - ActionMindFlayerSwarmprod
+    - ActionMindFlayerQuickReboot
+  - type: UserInterface
+    interfaces:
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.SurgeryUIKey.Key: # Shitmed
+        type: SurgeryBui
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: Store
+    categories:
+    - MindflayerPassive
+    - MindflayerIntruder
+    - MindflayerDestroyer
+    currencyWhitelist:
+    - StolenEssence
+    balance:
+      StolenEssence: 0
+    grantActionsToMind: false
