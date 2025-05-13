@@ -43,6 +43,8 @@
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
   - type: Eye
+  - type: Tag # DeltaV - we need a tag for mindflayer surveillance camera
+    tags: [SurveillanceCamera]
   - type: WiredNetworkConnection
   - type: DeviceNetworkRequiresPower
   - type: Transform

@@ -1,0 +1,12 @@
+- type: listing
+  id: MindFlayerCamfectingBug
+  name: Camfecting Bug
+  description: We hack a camera such that we may see from it
+  productAction: ActionMindFlayerCamfectingBug
+  cost:
+    RecoveredMind: 50
+  categories:
+  - MindflayerIntruder
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1

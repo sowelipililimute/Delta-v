@@ -27,7 +27,7 @@
     - MindflayerIntruder
     - MindflayerDestroyer
     currencyWhitelist:
-    - StolenEssence
+    - RecoveredMind
     balance:
-      StolenEssence: 0
+      RecoveredMind: 0
     grantActionsToMind: false

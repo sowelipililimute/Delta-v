@@ -39,8 +39,7 @@ public abstract class SharedMindflayerSystem : EntitySystem
             BreakOnMove = true,
             BreakOnDropItem = true,
         };
-        args.Handled = true;
-        _doAfter.TryStartDoAfter(doArgs);
+        args.Handled = _doAfter.TryStartDoAfter(doArgs);
     }
 
     protected virtual void OnSiphonMindDoAfter(Entity<MindflayerComponent> ent, ref MindflayerSiphonMindDoAfterEvent args)

@@ -57,9 +57,36 @@
     useDelay: 50
     whitelist:
       components:
-        - HumanoidAppearance
+      - HumanoidAppearance
     itemIconStyle: NoItem
     icon:
       sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
       state: siphon
     event: !type:MindflayerSiphonMindActionEvent
+
+- type: entity
+  id: ActionMindFlayerCamfectingBug
+  name: Camfecting Bug
+  description: We hack a camera such that we may see from it
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    useDelay: 50
+    whitelist:
+      tags:
+      - SurveillanceCamera
+    icon:
+      sprite: _DV/Interface/Actions/mindflayer.rsi
+      state: camera_bug
+    event: !type:MindflayerCamfectingBugEvent
+
+- type: entity
+  id: ActionMindFlayerViewCameras
+  name: View Cameras
+  description: See from a camera that we have hacked
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _DV/Interface/Actions/mindflayer.rsi
+      state: camera_bug
+    event: !type:MindflayerOpenHackedCamerasEvent

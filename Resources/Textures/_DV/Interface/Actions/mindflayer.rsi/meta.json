@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "swarmprod and quick_reboot from https://github.com/ParadiseSS13/Paradise/blob/505faec7261e4d71a68d677f36d91cc1631fc685/icons/mob/actions/flayer_actions.dmi, bg_flayer and choose_module from https://github.com/ParadiseSS13/Paradise/blob/505faec7261e4d71a68d677f36d91cc1631fc685/icons/mob/actions/actions.dmi",
+    "copyright": "swarmprod and quick_reboot from https://github.com/ParadiseSS13/Paradise/blob/505faec7261e4d71a68d677f36d91cc1631fc685/icons/mob/actions/flayer_actions.dmi, bg_flayer and choose_module from https://github.com/ParadiseSS13/Paradise/blob/505faec7261e4d71a68d677f36d91cc1631fc685/icons/mob/actions/actions.dmi, camera_bug from https://github.com/ParadiseSS13/Paradise/blob/505faec7261e4d71a68d677f36d91cc1631fc685/icons/obj/device.dmi",
     "size": {
         "x": 32,
         "y": 32
@@ -18,6 +18,9 @@
         },
         {
             "name": "quick_reboot"
+        },
+        {
+            "name": "camera_bug"
         }
     ]
 }

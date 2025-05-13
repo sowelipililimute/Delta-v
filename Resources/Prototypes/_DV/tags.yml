@@ -151,6 +151,9 @@
   id: SpeedLoaderSpecial
 
 - type: Tag
+  id: SurveillanceCamera
+
+- type: Tag
   id: Vial
 
 - type: Tag
