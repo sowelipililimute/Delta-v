@@ -90,3 +90,22 @@
       sprite: _DV/Interface/Actions/mindflayer.rsi
       state: camera_bug
     event: !type:MindflayerOpenHackedCamerasEvent
+
+- type: entity
+  id: ActionMindFlayerTraceroute
+  name: Traceroute
+  description: Allows us to record a computer's address. We can then use another computer to recall ourselves to it.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    useDelay: 60
+    whitelist:
+      components:
+      - MindflayerTraceRouteTarget
+    icon:
+      sprite: _DV/Interface/Actions/mindflayer.rsi
+      state: pd_cablehop
+    backgroundOn:
+      sprite: _DV/Interface/Actions/mindflayer.rsi
+      state: bg_flayer
+    event: !type:MindflayerTraceRouteActionEvent

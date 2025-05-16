@@ -10,3 +10,16 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
+
+- type: listing
+  id: MindFlayerTraceroute
+  name: Traceroute
+  description: Allows us to record a computer's address. We can then use another computer to recall ourselves to it
+  productAction: ActionMindFlayerTraceroute
+  cost:
+    RecoveredMind: 125
+  categories:
+  - MindflayerIntruder
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
