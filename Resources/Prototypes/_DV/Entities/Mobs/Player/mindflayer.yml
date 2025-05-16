@@ -21,6 +21,8 @@
         type: SurgeryBui
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
+      enum.CamfectingBugUiKey.Key:
+        type: CamfectingBugBoundUserInterface
   - type: Store
     categories:
     - MindflayerPassive
