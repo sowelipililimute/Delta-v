@@ -1,6 +1,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.DoAfter;
+using Content.Shared.Implants.Components;
 using Content.Shared.Store;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -33,3 +34,10 @@ public sealed partial class MindflayerSiphonMindActionEvent : EntityTargetAction
 
 [Serializable, NetSerializable]
 public sealed partial class MindflayerSiphonMindDoAfterEvent : SimpleDoAfterEvent;
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class MindflayerAddImplantEvent : EntityEventArgs
+{
+    [DataField(required: true)]
+    public EntProtoId<SubdermalImplantComponent> Implant;
+}

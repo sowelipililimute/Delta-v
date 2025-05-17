@@ -23,3 +23,34 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
+
+- type: listing
+  id: MindFlayerFacsimile
+  name: Facsimile
+  description: Allows us to rearrange our surface to resemble something we see.
+  productAction: ActionMindFlayerFacsimile
+  cost:
+    RecoveredMind: 80
+  categories:
+  - MindflayerIntruder
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: MindFlayerEnhancedVoiceModule
+  name: Enhanced Voice Module
+  description: Allows us to configure vocal modulator to sound like a different person.
+  productEvent: !type:MindflayerAddImplantEvent
+    implant: BionicVoiceMaskImplant
+  raiseProductEventOnUser: true
+  cost:
+    RecoveredMind: 80
+  icon:
+    sprite: _DV/Interface/Actions/mindflayer.rsi
+    state: voice_modulator
+  categories:
+  - MindflayerIntruder
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
