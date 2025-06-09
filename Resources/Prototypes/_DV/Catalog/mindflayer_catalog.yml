@@ -67,3 +67,16 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
+
+- type: listing
+  id: MindFlayerIntegratedAccessTuner
+  name: Integrated Access Tuner
+  description: Allows us to hack any panel remotely.
+  productAction: ActionMindFlayerIntegratedAccessTuner
+  cost:
+    RecoveredMind: 100
+  categories:
+  - MindflayerIntruder
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
