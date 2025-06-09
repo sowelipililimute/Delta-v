@@ -3,6 +3,7 @@
   id: MobMindflayer
   components:
   - type: Mindflayer
+    siphonQuantity: 100
   - type: ActionGrant
     actions:
     - ActionMindFlayerSiphonMind

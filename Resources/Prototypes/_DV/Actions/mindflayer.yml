@@ -130,3 +130,24 @@
     containers:
       retractable_slot:
         - MindflayerChameleonProjector
+
+- type: entity
+  id: ActionMindFlayerDestructiveInterference
+  name: Destructive Interference
+  description: Allows us to toggle a radio jamming signal.
+  components:
+  - type: InstantAction
+    raiseOnAction: true
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Devices/jammer.rsi
+      state: jammer
+    event: !type:RetractItemActionEvent
+  - type: RetractableItemAction
+  - type: ContainerContainer
+    containers:
+      retractable_slot: !type:ContainerSlot
+  - type: ContainerFill
+    containers:
+      retractable_slot:
+        - MindflayerRadioJammer

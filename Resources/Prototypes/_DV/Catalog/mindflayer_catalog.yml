@@ -54,3 +54,16 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
+
+- type: listing
+  id: MindFlayerDestructiveInterference
+  name: Destructive Interference
+  description: Allows us to toggle a radio jamming signal.
+  productAction: ActionMindFlayerDestructiveInterference
+  cost:
+    RecoveredMind: 80
+  categories:
+  - MindflayerIntruder
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
