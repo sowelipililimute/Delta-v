@@ -50,6 +50,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         InitializeModifier();
         InitializeResistance();
+        InitializeMeleeResistance(); // DeltaV
 
         SubscribeLocalEvent<StaminaComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<StaminaComponent, ComponentShutdown>(OnShutdown);
