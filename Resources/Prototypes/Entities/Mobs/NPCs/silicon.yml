@@ -269,6 +269,32 @@
 
 - type: entity
   parent: MobSiliconBase
+  id: MobCleanBotTest
+  name: htn debug cleanbot
+  components:
+  - type: Sprite
+    drawdepth: SmallMobs # DeltaV - cleanbots can go beneath tables
+    sprite: Mobs/Silicon/Bots/cleanbot.rsi
+    state: cleanbot
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: NuHTN
+    sensors:
+    - !type:NuEntitySensor
+      memory: Smelly
+      query: !type:NuNearbyHostilesQuery
+      considerations:
+      - !type:NuDistanceConsideration
+    task:
+      !type:NuMoveToTask
+      targetMemory: Smelly
+
+- type: entity
+  parent: MobSiliconBase
   id: MobCleanBot
   name: cleanbot
   description: The creep of automation now threatening space janitors.
