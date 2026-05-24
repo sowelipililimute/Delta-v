@@ -283,21 +283,108 @@
     factions:
     - SimpleHostile
   - type: NuHTN
+    sensingInterval: 0.5
     sensors:
     - !type:NuEntitySensor
-      memory: Smelly
+      coordinatesMemory: Smelly
+      coordinatesExpiration: 5
       query: !type:NuNearbyHostilesQuery
       considerations:
       - !type:NuDistanceConsideration
     task:
-      !type:NuSequenceTask
-      tasks:
-      - !type:NuSpeakTask
-        text: "You smell!"
-      - !type:NuMoveToTask
-        targetMemory: Smelly
-      - !type:NuSpeakTask
-        text: "All clean now..."
+      !type:NuBranchTask
+      branches:
+      - task:
+          !type:NuSequenceTask
+          tasks:
+          - !type:NuSpeakTask
+            text: "You smell!"
+          - !type:NuMoveToTask
+            targetMemory: Smelly
+          - !type:NuSpeakTask
+            text: "All clean now..."
+      - task:
+          !type:NuSpeakTask
+          text: "I'm boooored..."
+
+- type: entity
+  parent: MobCleanBotTest
+  id: MobCleanBotTestViolent
+  name: violent htn debug cleanbot
+  components:
+  - type: CombatMode
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 10
+        Structural: 10
+  - type: NuHTN
+    sensingInterval: 0.5
+    sensors:
+    - !type:NuEntitySensor
+      coordinatesMemory: Smelly
+      coordinatesExpiration: 5
+      query: !type:NuNearbyHostilesQuery
+      considerations:
+      - !type:NuDistanceConsideration
+    task:
+      !type:NuBranchTask
+      branches:
+      - task:
+          !type:NuSequenceTask
+          tasks:
+          - !type:NuSpeakTask
+            text: "You smell!"
+          - !type:NuMoveToTask
+            targetMemory: Smelly
+            flags: Climbing, Prying, Interact, Smashing
+          - !type:NuSpeakTask
+            text: "All clean now..."
+      - task:
+          !type:NuSpeakTask
+          text: "I'm boooored..."
+
+- type: entity
+  parent: MobCleanBotTest
+  id: MobCleanBotTestPrying
+  name: prying htn debug cleanbot
+  components:
+  - type: CombatMode
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 10
+        Structural: 10
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 2.5
+  - type: NuHTN
+    sensingInterval: 0.5
+    sensors:
+    - !type:NuEntitySensor
+      coordinatesMemory: Smelly
+      coordinatesExpiration: 5
+      query: !type:NuNearbyHostilesQuery
+      considerations:
+      - !type:NuDistanceConsideration
+    task:
+      !type:NuBranchTask
+      branches:
+      - task:
+          !type:NuSequenceTask
+          tasks:
+          - !type:NuSpeakTask
+            text: "You smell!"
+          - !type:NuMoveToTask
+            targetMemory: Smelly
+            flags: Climbing, Prying, Interact
+          - !type:NuSpeakTask
+            text: "All clean now..."
+      - task:
+          !type:NuSpeakTask
+          text: "I'm boooored..."
+
 
 - type: entity
   parent: MobSiliconBase

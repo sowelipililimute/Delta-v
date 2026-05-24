@@ -1,12 +1,22 @@
 using System.Linq;
+using Robust.Shared.Map;
 using Robust.Shared.Utility;
 
 namespace Content.Server._DV.NPC.Sensors;
 
 public sealed partial class NuEntitySensor : NuHTNSensorBase<NuEntitySensor, NuEntitySensorSystem>
 {
-    [DataField(required: true)]
-    public MemoryId<EntityUid> Memory;
+    [DataField]
+    public MemoryId<EntityUid>? EntityMemory;
+
+    [DataField]
+    public TimeSpan? EntityExpiration;
+
+    [DataField]
+    public MemoryId<EntityCoordinates>? CoordinatesMemory;
+
+    [DataField]
+    public TimeSpan? CoordinatesExpiration;
 
     [DataField(required: true)]
     public NuHTNEntityQuery Query;
@@ -38,11 +48,12 @@ public sealed class NuEntitySensorSystem : NuHTNSensorSystem<NuEntitySensorSyste
         }
 
         if (dictionary.Count == 0)
-        {
-            HTN.RemoveMemory(self, sensor.Memory, out _);
             return;
-        }
 
-        HTN.SetMemory(self, sensor.Memory, dictionary.MaxBy(kvp => kvp.Value).Key);
+        if (sensor.EntityMemory is { } entityMemory)
+            HTN.SetMemory(self, entityMemory, dictionary.MaxBy(kvp => kvp.Value).Key, sensor.EntityExpiration);
+
+        if (sensor.CoordinatesMemory is { } coordinatesMemory)
+            HTN.SetMemory(self, coordinatesMemory, Transform(dictionary.MaxBy(kvp => kvp.Value).Key).Coordinates, sensor.EntityExpiration);
     }
 }

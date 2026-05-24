@@ -14,7 +14,7 @@ public sealed class NuDistanceConsiderationSystem : NuHTNEntityConsiderationSyst
         var targetXform = Transform(target);
 
         if (selfXform.Coordinates.TryDistance(EntityManager, targetXform.Coordinates, out var distance))
-            return Math.Clamp(distance / consideration.Range, 0f, 1f);
+            return 1f - Math.Clamp(distance / consideration.Range, 0f, 1f);
 
         return 0f;
     }

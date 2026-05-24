@@ -203,7 +203,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
     #region Interactions
     protected void OnActivate(EntityUid uid, DoorComponent door, ActivateInWorldEvent args)
     {
-        if (args.Handled || !args.Complex || !door.ClickOpen)
+        if (args.Handled || !door.ClickOpen) // NuHTN - don't require this
             return;
 
         if (!TryToggleDoor(uid, door, args.User, predicted: true))

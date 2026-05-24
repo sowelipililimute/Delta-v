@@ -9,6 +9,7 @@ using Content.Server.NPC.Pathfinding;
 using Content.Shared.CCVar;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.CombatMode;
+using Content.Shared.Doors.Systems; // NuHTN - access reading
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
@@ -67,6 +68,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
+    [Dependency] private readonly SharedDoorSystem _door = default!; // NuHTN - access reading
 
     private EntityQuery<FixturesComponent> _fixturesQuery;
     private EntityQuery<MovementSpeedModifierComponent> _modifierQuery;
@@ -448,7 +450,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
 
         steering.PathfindToken = new CancellationTokenSource();
 
-        var flags = _pathfindingSystem.GetFlags(uid);
+        var flags = steering.Flags; // _pathfindingSystem.GetFlags(uid); // NuHTN - we aren't always using NPC blackboards
 
         var result = await _pathfindingSystem.GetPathSafe(
             uid,

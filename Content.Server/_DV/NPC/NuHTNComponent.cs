@@ -38,20 +38,23 @@ public sealed partial class NuHTNComponent : Component
 
 public readonly record struct MemoryId<TMemory>(string Id);
 
+[DataRecord]
+public readonly partial record struct Memory<TValue>(TimeSpan? ExpiresAfter, TValue Value);
+
 [ImplicitDataDefinitionForInheritors]
 public abstract partial class AnyMemoryKindData
 {
-    public abstract Dictionary<string, TMemory> GetMemories<TMemory>();
+    public abstract Dictionary<string, Memory<TMemory>> GetMemories<TMemory>();
 }
 
 public sealed partial class MemoryKindData<TKind> : AnyMemoryKindData
 {
     [DataField]
-    public Dictionary<string, TKind> Memories = new();
+    public Dictionary<string, Memory<TKind>> Memories = new();
 
-    public override Dictionary<string, TMemory> GetMemories<TMemory>()
+    public override Dictionary<string, Memory<TMemory>> GetMemories<TMemory>()
     {
-        if (Memories is not Dictionary<string, TMemory> memories)
+        if (Memories is not Dictionary<string, Memory<TMemory>> memories)
             throw new InvalidOperationException($"The memory kind for {typeof(TKind)} has been used to retrieve memories for {typeof(TMemory)}");
 
         return memories;

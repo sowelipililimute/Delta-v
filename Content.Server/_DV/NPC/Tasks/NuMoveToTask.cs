@@ -1,4 +1,3 @@
-using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.NPC.Components;
@@ -11,10 +10,13 @@ namespace Content.Server._DV.NPC.Tasks;
 public sealed partial class NuMoveToTask : NuHTNTaskBase<NuMoveToTask, NuMoveToPlan, NuMoveToSystem>
 {
     [DataField]
-    public MemoryId<EntityUid> TargetMemory;
+    public MemoryId<EntityCoordinates> TargetMemory;
 
     [DataField]
     public float FinishedWithin = 1f;
+
+    [DataField]
+    public PathFlags Flags = PathFlags.Climbing | PathFlags.Prying | PathFlags.Interact;
 }
 
 public sealed partial class NuMoveToPlan : NuHTNPlanBase<NuMoveToPlan, NuMoveToTask, NuMoveToSystem>
@@ -36,9 +38,10 @@ public sealed class NuMoveToSystem : NuHTNTaskSystem<NuMoveToSystem, NuMoveToTas
         var path = await _pathfinding.GetPath(
             self.Owner,
             Transform(self).Coordinates,
-            Transform(target).Coordinates,
+            target,
             task.FinishedWithin,
-            token);
+            token,
+            task.Flags);
 
         if (path.Result != PathResult.Path)
             return null;
@@ -55,16 +58,22 @@ public sealed class NuMoveToSystem : NuHTNTaskSystem<NuMoveToSystem, NuMoveToTas
         var target = HTN.GetMemory(self, plan.Task.TargetMemory);
 
         var selfCoordinates = _transform.ToMapCoordinates(Transform(self).Coordinates);
-        var targetCoordinates = new EntityCoordinates(target, Vector2.Zero);
 
-        _npcSteering.Register(self, new EntityCoordinates(target, Vector2.Zero));
-        _npcSteering.PrunePath(self, selfCoordinates, _transform.ToMapCoordinates(targetCoordinates).Position - selfCoordinates.Position, plan.Path);
+        _npcSteering.Register(self, target);
+        Comp<NPCSteeringComponent>(self).Flags = plan.Task.Flags;
+        _npcSteering.PrunePath(self, selfCoordinates, _transform.ToMapCoordinates(target).Position - selfCoordinates.Position, plan.Path);
     }
 
     public override NuHTNTaskResult Update(Entity<NuHTNComponent> self, NuMoveToPlan plan, float frameTime)
     {
         if (!TryComp<NPCSteeringComponent>(self, out var steering))
             return NuHTNTaskResult.Replan;
+
+        if (HTN.TryGetMemory(self, plan.Task.TargetMemory, out var target))
+        {
+            _npcSteering.Register(self, target);
+            Comp<NPCSteeringComponent>(self).Flags = plan.Task.Flags;
+        }
 
         return steering.Status switch
         {

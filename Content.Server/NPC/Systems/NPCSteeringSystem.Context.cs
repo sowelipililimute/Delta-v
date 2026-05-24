@@ -213,10 +213,12 @@ public sealed partial class NPCSteeringSystem
                 lock (_obstacles)
                 {
                     // We're still coming to a stop so wait for the do_after.
-                    if (body.LinearVelocity.LengthSquared() > 0.01f)
-                    {
-                        return true;
-                    }
+                    // Begin NuHTN - a little jiggle is fine
+                    // if (body.LinearVelocity.LengthSquared() > 0.01f)
+                    // {
+                    //    return true;
+                    // }
+                    // End NuHTN - a little jiggle is fine
 
                     status = TryHandleFlags(uid, steering, node);
                 }

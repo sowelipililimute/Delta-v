@@ -81,17 +81,17 @@ public sealed partial class NPCSteeringSystem
             var isClimbable = (poly.Data.Flags & PathfindingBreadcrumbFlag.Climb) != 0x0;
 
             // Just walk into it stupid
-            if (isDoor && !isAccessRequired)
+            if (isDoor) // NuHTN - access-aware
             {
                 var doorQuery = GetEntityQuery<DoorComponent>();
 
                 // ... At least if it's not a bump open.
                 foreach (var ent in obstacleEnts)
                 {
-                    if (!doorQuery.TryGetComponent(ent, out var door))
+                    if (!doorQuery.TryGetComponent(ent, out var door) || !_door.HasAccess(ent, uid)) // NuHTN - access-aware
                         continue;
 
-                    if (!door.BumpOpen && (component.Flags & PathFlags.Interact) != 0x0)
+                    if ((component.Flags & PathFlags.Interact) != 0x0) // NuHTN - more intelligent opening
                     {
                         if (door.State != DoorState.Opening)
                         {
@@ -161,8 +161,13 @@ public sealed partial class NPCSteeringSystem
             // Try smashing obstacles.
             else if ((component.Flags & PathFlags.Smashing) != 0x0)
             {
-                if (_melee.TryGetWeapon(uid, out var weaponUid, out var meleeWeapon) && meleeWeapon.NextAttack <= _timing.CurTime && TryComp<CombatModeComponent>(uid, out var combatMode)) // DeltaV - Get weaponuid
+                if (_melee.TryGetWeapon(uid, out var weaponUid, out var meleeWeapon) && TryComp<CombatModeComponent>(uid, out var combatMode)) // DeltaV - Get weaponuid
                 {
+                    // Begin NuHTN - don't die on weapon cooldown
+                    if (meleeWeapon.NextAttack > _timing.CurTime)
+                        return SteeringObstacleStatus.Continuing;
+                    // End NuHTN
+
                     _combat.SetInCombatMode(uid, true, combatMode);
                     var destructibleQuery = GetEntityQuery<DestructibleComponent>();
 
