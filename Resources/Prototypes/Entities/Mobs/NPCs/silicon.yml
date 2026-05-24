@@ -385,6 +385,41 @@
           !type:NuSpeakTask
           text: "I'm boooored..."
 
+- type: entity
+  parent: MobCleanBotTest
+  id: MobCleanBotTestKiting
+  name: kiting htn debug cleanbot
+  components:
+  - type: NuHTN
+    sensingInterval: 0.5
+    sensors:
+    - !type:NuEntitySensor
+      entityMemory: Target
+      entityExpiration: 5
+      coordinatesMemory: Smelly
+      coordinatesExpiration: 5
+      query: !type:NuNearbyHostilesQuery
+      considerations:
+      - !type:NuDistanceConsideration
+    task:
+      !type:NuBranchTask
+      branches:
+      - task:
+          !type:NuSequenceTask
+          tasks:
+          - !type:NuSpeakTask
+            text: "You smell!"
+          - !type:NuMoveToTask
+            targetMemory: Smelly
+            flags: Climbing, Prying, Interact
+          - !type:NuSpeakTask
+            text: "I'm stalking u now..."
+          - !type:NuKiteTask
+            targetMemory: Target
+      - task:
+          !type:NuSpeakTask
+          text: "I'm boooored..."
+
 
 - type: entity
   parent: MobSiliconBase

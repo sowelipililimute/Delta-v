@@ -74,7 +74,8 @@ public sealed class NuSequenceSystem : NuHTNTaskSystem<NuSequenceSystem, NuSeque
 
         plan.CurrentPlan = nextSubplan;
         plan.CurrentPlan.Start(self, HTN);
-        return plan.CurrentPlan.Update(self, HTN, frameTime);
+
+        return NuHTNTaskResult.ContinueTask;
     }
 
     public override void Stop(Entity<NuHTNComponent> self, NuSequencePlan plan)
