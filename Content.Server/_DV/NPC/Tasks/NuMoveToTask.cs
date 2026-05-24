@@ -1,8 +1,10 @@
+using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.NPC.Components;
 using Content.Server.NPC.Pathfinding;
 using Content.Server.NPC.Systems;
+using Robust.Shared.Map;
 
 namespace Content.Server._DV.NPC.Tasks;
 
@@ -53,10 +55,9 @@ public sealed class NuMoveToSystem : NuHTNTaskSystem<NuMoveToSystem, NuMoveToTas
         var target = HTN.GetMemory(self, plan.Task.TargetMemory);
 
         var selfCoordinates = _transform.ToMapCoordinates(Transform(self).Coordinates);
-        var targetCoordinates = Transform(target).Coordinates;
+        var targetCoordinates = new EntityCoordinates(target, Vector2.Zero);
 
-
-        _npcSteering.Register(self, targetCoordinates);
+        _npcSteering.Register(self, new EntityCoordinates(target, Vector2.Zero));
         _npcSteering.PrunePath(self, selfCoordinates, _transform.ToMapCoordinates(targetCoordinates).Position - selfCoordinates.Position, plan.Path);
     }
 
