@@ -72,9 +72,15 @@ public abstract class NuHTNTaskSystem<TSelf, TTask, TPlan> : EntitySystem
     [Dependency] protected readonly NuHTNSystem HTN = default!;
 
     public abstract Task<TPlan?> Plan(Entity<NuHTNComponent> self, TTask task, CancellationToken token);
-    public abstract void Start(Entity<NuHTNComponent> self, TPlan plan);
+
+    public virtual void Start(Entity<NuHTNComponent> self, TPlan plan)
+    {
+    }
     public abstract NuHTNTaskResult Update(Entity<NuHTNComponent> self, TPlan plan, float frameTime);
-    public abstract void Stop(Entity<NuHTNComponent> self, TPlan plan);
+
+    public virtual void Stop(Entity<NuHTNComponent> self, TPlan plan)
+    {
+    }
 }
 
 public enum NuHTNTaskResult

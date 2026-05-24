@@ -290,8 +290,14 @@
       considerations:
       - !type:NuDistanceConsideration
     task:
-      !type:NuMoveToTask
-      targetMemory: Smelly
+      !type:NuSequenceTask
+      tasks:
+      - !type:NuSpeakTask
+        text: "You smell!"
+      - !type:NuMoveToTask
+        targetMemory: Smelly
+      - !type:NuSpeakTask
+        text: "All clean now..."
 
 - type: entity
   parent: MobSiliconBase
