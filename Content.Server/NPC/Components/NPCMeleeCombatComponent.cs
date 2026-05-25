@@ -17,6 +17,12 @@ public sealed partial class NPCMeleeCombatComponent : Component
 
     [ViewVariables]
     public CombatStatus Status = CombatStatus.Normal;
+
+    /// <summary>
+    /// NuHTN - Whether this component will attempt to steer
+    /// </summary>
+    [ViewVariables]
+    public bool Steer = true;
 }
 
 public enum CombatStatus : byte

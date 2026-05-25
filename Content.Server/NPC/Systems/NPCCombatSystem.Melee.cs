@@ -25,7 +25,10 @@ public sealed partial class NPCCombatSystem
             _combat.SetInCombatMode(uid, false, combatMode);
         }
 
-        _steering.Unregister(uid);
+        // Begin NuHTN Changes - we need explicit steering control
+        if (component.Steer)
+            _steering.Unregister(uid);
+        // End NuHTN Changes - we need explicit steering control
     }
 
     private void OnMeleeStartup(EntityUid uid, NPCMeleeCombatComponent component, ComponentStartup args)
@@ -92,8 +95,13 @@ public sealed partial class NPCCombatSystem
             return;
         }
 
-        // TODO: When I get parallel operators move this as NPC combat shouldn't be handling this.
-        _steering.Register(uid, new EntityCoordinates(component.Target, Vector2.Zero), steering);
+        // Begin NuHTN Changes - we need explicit steering control
+        if (component.Steer)
+        {
+            // TODO: When I get parallel operators move this as NPC combat shouldn't be handling this.
+            _steering.Register(uid, new EntityCoordinates(component.Target, Vector2.Zero), steering);
+        }
+        // End NuHTN Changes - we need explicit steering control
 
         if (distance > weapon.Range)
         {
