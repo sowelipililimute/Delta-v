@@ -10,6 +10,9 @@ public sealed partial class NuKiteTask : NuHTNTaskBase<NuKiteTask, NuKitePlan, N
 {
     [DataField]
     public MemoryId<EntityUid> TargetMemory;
+
+    [DataField]
+    public float KiteDistance;
 }
 
 public sealed partial class NuKitePlan : NuHTNPlanBase<NuKitePlan, NuKiteTask, NuKiteSystem>;
@@ -40,7 +43,7 @@ public sealed class NuKiteSystem : NuHTNTaskSystem<NuKiteSystem, NuKiteTask, NuK
 
         var targetToSelf = selfCoords.Position - targetCoords.Position;
         targetToSelf.Normalize();
-        targetToSelf *= 2f;
+        targetToSelf *= plan.Task.KiteDistance;
 
         var actualPosition = targetCoords.Position + targetToSelf;
         var actualCoordinates = new MapCoordinates(actualPosition, targetCoords.MapId);
